@@ -15,11 +15,12 @@ public class InitDataBase {
             st.executeUpdate("CREATE TABLE IF NOT EXISTS users (" +
                     "id INTEGER PRIMARY KEY, " +
                     "name VARCHAR(255), " +
+                    "login VARCHAR(255), " +
+                    "password VARCHAR(255)," +
                     "role_id INTEGER, " +
-                    "address_id INTEGER, " +
-                    "music_pref_id INTEGER);");
-            st.executeUpdate("INSERT INTO users VALUES (1, 'ivan', 1, 1, 1);");
-            st.executeUpdate("INSERT INTO users VALUES (2, 'vasia', 2, 1, 1);");
+                    "address_id INTEGER);");
+            st.executeUpdate("INSERT INTO users VALUES (1, 'ivan', 'admin', '1', 1, 1);");
+            st.executeUpdate("INSERT INTO users VALUES (2, 'vasia', 'user', '2', 2, 1);");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }

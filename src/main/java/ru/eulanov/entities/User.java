@@ -7,6 +7,7 @@ public class User {
     private String login;
     private String address;
     private String role;
+    private String password;
     private String[] favoriteMusic;
 
     public long getId() {
@@ -55,6 +56,14 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package ru.eulanov.servlets;
 
+import ru.eulanov.entities.User;
+import ru.eulanov.stores.UserStore;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +19,10 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
+        User user = UserStore.getInstance().getUserByLogin(login);
         String password = req.getParameter("password");
-        HttpSession session = req.getSession();
-        if (!login.equals("")) {
+        if (user.getLogin() != null && user.getPassword().equals(password)) {
+            HttpSession session = req.getSession();
             session.setAttribute("login", login);
             req.getRequestDispatcher("WEB-INF/views/adminPage.jsp").forward(req, resp);
         } else {
