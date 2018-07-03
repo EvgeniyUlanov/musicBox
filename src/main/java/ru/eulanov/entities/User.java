@@ -1,5 +1,7 @@
 package ru.eulanov.entities;
 
+import java.util.List;
+
 public class User {
 
     private long id;
@@ -8,7 +10,7 @@ public class User {
     private String address;
     private String role;
     private String password;
-    private String[] favoriteMusic;
+    private List<String> favoriteMusic;
 
     public long getId() {
         return id;
@@ -42,11 +44,11 @@ public class User {
         this.role = role;
     }
 
-    public String[] getFavoriteMusic() {
+    public List<String> getFavoriteMusic() {
         return favoriteMusic;
     }
 
-    public void setFavoriteMusic(String[] favoriteMusic) {
+    public void setFavoriteMusic(List<String> favoriteMusic) {
         this.favoriteMusic = favoriteMusic;
     }
 

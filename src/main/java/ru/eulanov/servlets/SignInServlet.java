@@ -19,12 +19,13 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
-        User user = UserStore.getInstance().getUserByLogin(login);
+        User user = UserStore.getInstance().getUserForLogin(login);
         String password = req.getParameter("password");
         if (user.getLogin() != null && user.getPassword().equals(password)) {
             HttpSession session = req.getSession();
-            session.setAttribute("login", login);
-            req.getRequestDispatcher("WEB-INF/views/adminPage.jsp").forward(req, resp);
+            session.setAttribute("login", user.getLogin());
+            session.setAttribute("user", user);
+            resp.sendRedirect(String.format("%s/", req.getContextPath()));
         } else {
             doGet(req, resp);
         }

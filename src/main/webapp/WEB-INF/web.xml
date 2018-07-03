@@ -27,6 +27,26 @@
         <url-pattern>/sign</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Sign out servlet</servlet-name>
+        <servlet-class>ru.eulanov.servlets.SignOutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Sign out servlet</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Get all users servlet</servlet-name>
+        <servlet-class>ru.eulanov.servlets.GetAllUserServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Get all users servlet</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>Filter</filter-name>
         <filter-class>ru.eulanov.servlets.AutorizationFilter</filter-class>
@@ -36,5 +56,10 @@
         <filter-name>Filter</filter-name>
         <url-pattern>*</url-pattern>
     </filter-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>
