@@ -46,6 +46,16 @@
         <servlet-name>Get all users servlet</servlet-name>
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Add user servlet</servlet-name>
+        <servlet-class>ru.eulanov.servlets.AddUserServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Add user servlet</servlet-name>
+        <url-pattern>/user/add</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>Filter</filter-name>

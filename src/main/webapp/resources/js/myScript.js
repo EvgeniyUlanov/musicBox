@@ -1,11 +1,9 @@
 var $url = window.location.pathname;
+var navigation;
 
 $(document).ready(function () {
-    //function for navigate
-    var navigation = $('.navbar');
-    $('.content').hide();
-    navigation.find('.nav-item:first').addClass('active').show();
-    $('.content:first').show();
+    navigation = $('.navbar');
+    HideContentAndShowFirst();
 
     navigation.find('.nav-item').click(function () {
         $('#nav').find('nav-item').removeClass('active');
@@ -17,8 +15,47 @@ $(document).ready(function () {
         return false;
     });
 
+    $('#sendToAddUser').click(function () {
+        $('.content').hide();
+        $('#addUser').show();
+    });
+
     FillTable();
+    AddActionToAddUserButton();
 });
+
+function AddActionToAddUserButton() {
+    $('#addUserBtn').click(function () {
+        var name = $('#addName').val();
+        var login = $('#addLogin').val();
+        var password = $('#addPassword').val();
+        var role = $('#addRole').val();
+        var address = $('#addAddress').val();
+        var JSONObject = {
+            "name": name,
+            "login": login,
+            "password": password,
+            "role": role,
+            "address": address
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: $url + 'user/add',
+            contentType: 'application/json',
+            data: JSON.stringify(JSONObject),
+            async: false
+        });
+        FillTable();
+        HideContentAndShowFirst();
+    })
+}
+
+function HideContentAndShowFirst() {
+    $('.content').hide();
+    navigation.find('.nav-item:first').addClass('active').show();
+    $('.content:first').show();
+}
 
 function FillTable() {
     var $select = $("#tableUsers");
@@ -36,7 +73,6 @@ function FillTable() {
             var $tdButtonUpdate = $('<td>').appendTo(tableRaw);
             $('<button>').addClass("updateUser btn btn-warning").text("update").appendTo($tdButtonUpdate);
         });
-        AddDeleteHandlerToButtonDelete($select);
-        AddUpdateHandlerToButtonUpdate($select);
     });
 }
+

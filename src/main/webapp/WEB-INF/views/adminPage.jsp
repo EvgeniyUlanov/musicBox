@@ -9,8 +9,8 @@
     <script type="text/javascript" src="resources/js/myScript.js"></script>
 </head>
 <body>
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
         <a class="navbar-brand" href="#">Admin Page</a>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
@@ -21,8 +21,8 @@
         <form class="form-inline" action="${pageContext.servletContext.contextPath}/signout">
             <input class="btn btn-primary" type="submit" value="Sign out">
         </form>
-    </nav>
-</div>
+    </div>
+</nav>
 
 <div class="container">
     <div class="content row justify-content-center align-items-center" id="usersTable">
@@ -37,6 +37,26 @@
                 <th>Full info</th>
             </tr>
         </table>
+        <input class="btn btn-primary" id="sendToAddUser" value="add new user">
+    </div>
+</div>
+
+<div class="container content" id="addUser">
+    <h1 class="text-center">Add new User Form</h1>
+    <div class="row justify-content-center align-items-center">
+        <form>
+            <label for="addName">Name:</label>
+            <input class="form-control" id="addName" placeholder="enter user name"/>
+            <label for="addLogin">Login:</label>
+            <input class="form-control" id="addLogin" placeholder="enter user login" required/>
+            <label for="addPassword">Password:</label>
+            <input class="form-control" id="addPassword" placeholder="enter user password"/>
+            <label for="addRole">Role:</label>
+            <input class="form-control" id="addRole" placeholder="enter user role" required/>
+            <label for="addAddress">Address:</label>
+            <input class="form-control" id="addAddress" placeholder="enter user address"/>
+            <input id="addUserBtn" class="btn btn-primary" value="add new user">
+        </form>
     </div>
 </div>
 </body>

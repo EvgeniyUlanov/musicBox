@@ -86,13 +86,13 @@ public class UserStore {
         return users;
     }
 
-    private List<String> getFavoriteUserMusic(long id) {
+    private List<String> getFavoriteUserMusic(long userId) {
         List<String> favoriteMusic = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              PreparedStatement ps = conn.prepareStatement(
                      "SELECT music_types.music_type FROM music_prefers "
                              + "INNER JOIN music_types ON music_prefers.music_type_id = music_types.id WHERE user_id = ?")) {
-            ps.setLong(1, id);
+            ps.setLong(1, userId);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 favoriteMusic.add(rs.getString("music_type"));
@@ -121,5 +121,55 @@ public class UserStore {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public boolean deleteUser(long userId) {
+        boolean result = false;
+        try (Connection conn = DBConnectionPool.getDbSource().getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     "DELETE FROM users WHERE id = ?;");
+             PreparedStatement ps2 = conn.prepareStatement("DELETE FROM music_prefers WHERE user_id = ?;")) {
+            ps.setLong(1, userId);
+            ps2.setLong(1, userId);
+            result = ps.executeUpdate() == 1;
+            ps2.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean addUser(User user) {
+        boolean result = false;
+        try (Connection conn = DBConnectionPool.getDbSource().getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO users " +
+                     "(name, login, password, role_id, address_id) VALUES (" +
+                     "?, " +
+                     "?, " +
+                     "?, " +
+                     "(SELECT roles.id FROM roles WHERE role_name = ?), " +
+                     "(SELECT address.id FROM address WHERE addres = ?))")) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getLogin());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getRole());
+            ps.setString(5, user.getAddress());
+            result = ps.executeUpdate() == 1;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean setMusicPrefToUser(long userId, long musicTypeId) {
+        boolean result = false;
+        try (Connection conn = DBConnectionPool.getDbSource().getConnection();
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO music_prefers VALUES (?, ?)")) {
+            ps.setLong(1, userId);
+            ps.setLong(2, musicTypeId);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }
