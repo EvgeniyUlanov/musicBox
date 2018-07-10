@@ -14,13 +14,13 @@ public class InitDataBase {
             st.executeUpdate("DROP TABLE IF EXISTS users CASCADE;");
             st.executeUpdate("CREATE TABLE IF NOT EXISTS users (" +
                     "id SERIAL PRIMARY KEY, " +
-                    "name VARCHAR(255), " +
+                    "name VARCHAR(255) UNIQUE, " +
                     "login VARCHAR(255) UNIQUE, " +
                     "password VARCHAR(255)," +
                     "role_id INTEGER REFERENCES roles(id), " +
                     "address_id INTEGER REFERENCES address(id));");
             st.executeUpdate("INSERT INTO users (name, login, password, role_id, address_id) VALUES ('ivan', 'admin', '1', 1, 1);");
-            st.executeUpdate("INSERT INTO users (name, login, password, role_id, address_id) VALUES ('vasia', 'user', '2', 2, 1);");
+            st.executeUpdate("INSERT INTO users (name, login, password, role_id, address_id) VALUES ('vasia', 'user', '2', 2, 2);");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class InitDataBase {
             st.executeUpdate("DROP TABLE IF EXISTS address CASCADE");
             st.executeUpdate("CREATE TABLE IF NOT EXISTS address (" +
                     "id SERIAL PRIMARY KEY, " +
-                    "addres VARCHAR(255));");
+                    "addres VARCHAR(255) UNIQUE);");
             st.executeUpdate("INSERT INTO address (addres) VALUES ('velikiy-novgorod');");
             st.executeUpdate("INSERT INTO address (addres) VALUES ('moscow');");
         } catch (SQLException | ClassNotFoundException e) {
@@ -77,8 +77,8 @@ public class InitDataBase {
              Statement st = conn.createStatement()) {
             st.executeUpdate("DROP TABLE IF EXISTS music_prefers CASCADE");
             st.executeUpdate("CREATE TABLE IF NOT EXISTS music_prefers (" +
-                    "user_id INTEGER NOT NULL REFERENCES users(id), " +
-                    "music_type_id INTEGER NOT NULL REFERENCES music_types(id), " +
+                    "user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE, " +
+                    "music_type_id INTEGER NOT NULL REFERENCES music_types(id) ON DELETE CASCADE, " +
                     "UNIQUE (user_id, music_type_id));");
             st.executeUpdate("INSERT INTO music_prefers VALUES (1, 1);");
             st.executeUpdate("INSERT INTO music_prefers VALUES (1, 2);");
