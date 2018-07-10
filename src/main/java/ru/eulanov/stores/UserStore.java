@@ -1,15 +1,16 @@
 package ru.eulanov.stores;
 
 import ru.eulanov.connectionpool.DBConnectionPool;
-import ru.eulanov.entities.MusicType;
 import ru.eulanov.entities.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class for user operations
+ */
 public class UserStore {
-
     /**
      * instance of user store.
      */
@@ -28,13 +29,17 @@ public class UserStore {
 
     /**
      * method return instance of user store.
-     *
      * @return - UserStore.
      */
     public static UserStore getInstance() {
         return USER_STORE;
     }
 
+    /**
+     * method for get user by id
+     * @param id - user id
+     * @return user
+     */
     public User getUserById(long id) {
         User user = new User();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -59,6 +64,10 @@ public class UserStore {
         return user;
     }
 
+    /**
+     * method for get all users
+     * @return list of users
+     */
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -84,6 +93,11 @@ public class UserStore {
         return users;
     }
 
+    /**
+     * method for get all user favorite music
+     * @param userId - user id
+     * @return list of music types
+     */
     private List<String> getFavoriteUserMusic(long userId) {
         List<String> favoriteMusic = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -101,6 +115,11 @@ public class UserStore {
         return favoriteMusic;
     }
 
+    /**
+     * method for get user for login page.
+     * @param login - user login
+     * @return user
+     */
     public User getUserForLogin(String login) {
         User user = new User();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -121,6 +140,11 @@ public class UserStore {
         return user;
     }
 
+    /**
+     * method delete user
+     * @param userId - user id
+     * @return boolean
+     */
     public boolean deleteUser(long userId) {
         boolean result = false;
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -134,6 +158,11 @@ public class UserStore {
         return result;
     }
 
+    /**
+     * method add user
+     * @param user - user to add
+     * @return boolean
+     */
     public boolean addUser(User user) {
         boolean result = false;
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -156,6 +185,12 @@ public class UserStore {
         return result;
     }
 
+    /**
+     * method add music type to user favorite music
+     * @param userId - user id
+     * @param musicType - music type
+     * @return boolean
+     */
     public boolean setMusicPrefToUser(long userId, String musicType) {
         boolean result = false;
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -170,6 +205,11 @@ public class UserStore {
         return result;
     }
 
+    /**
+     * method update user
+     * @param user - user to update
+     * @return boolean
+     */
     public boolean updateUser(User user) {
         boolean result = false;
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -193,6 +233,12 @@ public class UserStore {
         return result;
     }
 
+    /**
+     * method delete music type from user favorite music list
+     * @param userId - user id
+     * @param musicType - music type
+     * @return boolean
+     */
     public boolean deleteMusicFromUser(Long userId, String musicType) {
         boolean result = false;
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -208,6 +254,11 @@ public class UserStore {
         return result;
     }
 
+    /**
+     * method find user by name
+     * @param name - user name
+     * @return user list.
+     */
     public List<User> findUserByName(String name) {
         List<User> userList = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -226,6 +277,11 @@ public class UserStore {
         return userList;
     }
 
+    /**
+     * method find user by login
+     * @param login user login
+     * @return user list
+     */
     public List<User> findUserByLogin(String login) {
         List<User> userList = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -244,6 +300,12 @@ public class UserStore {
         return userList;
     }
 
+    /**
+     * method fill user from result set
+     * @param rs - result set
+     * @return user
+     * @throws SQLException - sql exception
+     */
     private User fillUserFromResultSet(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getLong("id"));
@@ -255,6 +317,11 @@ public class UserStore {
         return user;
     }
 
+    /**
+     * method to find user by role
+     * @param role - user role
+     * @return user list
+     */
     public List<User> findUserByRole(String role) {
         List<User> users = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -273,6 +340,11 @@ public class UserStore {
         return users;
     }
 
+    /**
+     * method to find user by address
+     * @param address  user address
+     * @return user list
+     */
     public List<User> findUserByAddress(String address) {
         List<User> users = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
@@ -291,6 +363,11 @@ public class UserStore {
         return users;
     }
 
+    /**
+     * method to find user by music type
+     * @param musicType - music type
+     * @return user list
+     */
     public List<User> findUserByMusic(String musicType) {
         List<User> users = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();

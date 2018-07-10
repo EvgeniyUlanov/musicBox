@@ -7,7 +7,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class for address crud operations
+ */
 public class AddressStore {
+    /** instance of address store*/
     private final static AddressStore ADDRESS_STORE = new AddressStore();
 
     /**
@@ -30,6 +34,10 @@ public class AddressStore {
         return ADDRESS_STORE;
     }
 
+    /**
+     * method return all addresses.
+     * @return addresses
+     */
     public List<String> getAllAddress() {
         List<String> address = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection(); Statement st = conn.createStatement()) {
@@ -43,6 +51,10 @@ public class AddressStore {
         return address;
     }
 
+    /**
+     * method add address to database
+     * @param address - address to add
+     */
     public void addAddress(Address address) {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO address (addres) VALUES (?);")) {
@@ -53,6 +65,10 @@ public class AddressStore {
         }
     }
 
+    /**
+     * method delete address from database.
+     * @param address - address to delete
+     */
     public void deleteAddress(Address address) {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              PreparedStatement ps = conn.prepareStatement("DELETE FROM address WHERE id = ?;")) {
@@ -63,6 +79,10 @@ public class AddressStore {
         }
     }
 
+    /**
+     * method update address
+     * @param address - new address
+     */
     public void updateAddress(Address address) {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              PreparedStatement ps = conn.prepareStatement("UPDATE address SET addres = ? WHERE id = ?")) {

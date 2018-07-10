@@ -10,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * user controller.
+ * init data base connection
+ * send user to admin or user page, depended of user role
+ * close connection to database
+ */
 public class UserController extends HttpServlet {
 
     @Override

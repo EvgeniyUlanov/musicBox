@@ -9,8 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class for roles operations
+ */
 public class RoleStore {
-
+    /** instance of roles store*/
     private final static RoleStore ROLE_STORE = new RoleStore();
 
     /**
@@ -26,13 +29,16 @@ public class RoleStore {
 
     /**
      * method return instance of user store.
-     *
      * @return - UserStore.
      */
     public static RoleStore getInstance() {
         return ROLE_STORE;
     }
 
+    /**
+     * method for get all roles
+     * @return list of roles
+     */
     public List<String> getAllRoles() {
         List<String> roles = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection(); Statement st = conn.createStatement()) {

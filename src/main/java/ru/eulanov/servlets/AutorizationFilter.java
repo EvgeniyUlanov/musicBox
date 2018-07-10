@@ -6,13 +6,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * filter for autorization user
+ */
 public class AutorizationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
+    /**
+     * method doFilter redirect user to sing in page if user is not logged
+     * @param request - request
+     * @param response - response
+     * @param chain - chain
+     * @throws ServletException - servlet exception
+     * @throws IOException - io exception
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;

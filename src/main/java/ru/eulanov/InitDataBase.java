@@ -6,8 +6,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * class for init database
+ */
 public class InitDataBase {
 
+    /**
+     * method creates user table
+     */
     public static void createTableUsers() {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              Statement st = conn.createStatement()) {
@@ -26,6 +32,9 @@ public class InitDataBase {
         }
     }
 
+    /**
+     * method creates table roles
+     */
     public static void createTableRoles() {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              Statement st = conn.createStatement()) {
@@ -41,6 +50,9 @@ public class InitDataBase {
         }
     }
 
+    /**
+     * method creates table address
+     */
     public static void createTableAddress() {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              Statement st = conn.createStatement()) {
@@ -55,6 +67,9 @@ public class InitDataBase {
         }
     }
 
+    /**
+     * method create table music
+     */
     public static void createTableMusicTypes() {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              Statement st = conn.createStatement()) {
@@ -72,6 +87,9 @@ public class InitDataBase {
         }
     }
 
+    /**
+     * method creates table music preference
+     */
     public static void createTableMusicPreferes() {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              Statement st = conn.createStatement()) {

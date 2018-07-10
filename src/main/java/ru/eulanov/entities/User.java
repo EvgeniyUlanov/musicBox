@@ -2,14 +2,23 @@ package ru.eulanov.entities;
 
 import java.util.List;
 
+/**
+ * class for entity user.
+ */
 public class User {
-
+    /** user id*/
     private long id;
+    /** user name*/
     private String name;
+    /** user login*/
     private String login;
+    /** user address*/
     private String address;
+    /** user role*/
     private String role;
+    /** user password*/
     private String password;
+    /** user's favorite music*/
     private List<String> favoriteMusic;
 
     public long getId() {
@@ -66,10 +75,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return id + " - " + name + ", role - " + role + ", login - " + login;
     }
 }

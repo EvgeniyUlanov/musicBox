@@ -8,7 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * servlet do delete user from database
+ */
 public class DeleteUserServlet extends HttpServlet {
+    /**
+     * method doGet delete user by user id
+     * @param req - request
+     * @param resp - response
+     * @throws ServletException - servlet exception
+     * @throws IOException - io exception
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {

@@ -8,7 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * servlet to set music type to user as favorite.
+ */
 public class AddMusicToUserServlet extends HttpServlet {
+    /**
+     * method doPost.
+     * @param req - http request
+     * @param resp - http response
+     * @throws ServletException - servlet exception
+     * @throws IOException - io exception
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long userId = Long.parseLong(req.getParameter("userId"));

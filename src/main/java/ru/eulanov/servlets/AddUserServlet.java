@@ -13,7 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * servlet to save user to database
+ */
 public class AddUserServlet extends HttpServlet {
+    /**
+     * method doPost
+     * @param req - http request
+     * @param resp - http response
+     * @throws ServletException - servlet exception
+     * @throws IOException - io exception
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String incomingString = MyUtil.getIncomingStringFromReqest(req);

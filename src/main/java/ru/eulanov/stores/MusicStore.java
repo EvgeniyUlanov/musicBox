@@ -1,7 +1,7 @@
 package ru.eulanov.stores;
 
 import ru.eulanov.connectionpool.DBConnectionPool;
-import ru.eulanov.entities.MusicType;
+import ru.eulanov.entities.Music;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,11 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MusicTypeStore {
+/**
+ * class for music crud operations
+ */
+public class MusicStore {
+    /** instance of music store*/
+    private static final MusicStore MUSIC_STORE = new MusicStore();
 
-    private static final MusicTypeStore MUSIC_TYPE_STORE = new MusicTypeStore();
-
-    private MusicTypeStore() {
+    /**
+     * constructor
+     */
+    private MusicStore() {
         try {
             Class.forName("ru.eulanov.connectionpool.DBConnectionPool");
         } catch (ClassNotFoundException e) {
@@ -22,17 +28,25 @@ public class MusicTypeStore {
         }
     }
 
-    public static MusicTypeStore getInstance() {
-        return MUSIC_TYPE_STORE;
+    /**
+     * method to get instance of music store
+     * @return instance of music store
+     */
+    public static MusicStore getInstance() {
+        return MUSIC_STORE;
     }
 
-    public List<MusicType> getAll() {
-        List<MusicType> musicTypes = new ArrayList<>();
+    /**
+     * method return all music types.
+     * @return list of music types.
+     */
+    public List<Music> getAll() {
+        List<Music> musicTypes = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM music_types")) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                MusicType musicType = new MusicType();
+                Music musicType = new Music();
                 musicType.setId(rs.getLong("id"));
                 musicType.setMusicType(rs.getString("music_type"));
                 musicTypes.add(musicType);
@@ -43,7 +57,11 @@ public class MusicTypeStore {
         return musicTypes;
     }
 
-    public void addMusicType(MusicType musicType) {
+    /**
+     * method add music type
+     * @param musicType - music type to add.
+     */
+    public void addMusicType(Music musicType) {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO music_types (music_type) VALUES (?)")) {
             ps.setString(1, musicType.getMusicType());
@@ -53,6 +71,10 @@ public class MusicTypeStore {
         }
     }
 
+    /**
+     * method delete music type
+     * @param id - music type id
+     */
     public void deleteMusicType(long id) {
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              PreparedStatement ps = conn.prepareStatement("DELETE FROM music_types WHERE id = ?")) {
@@ -63,8 +85,13 @@ public class MusicTypeStore {
         }
     }
 
-    public MusicType getMusicTypeById(long id) {
-        MusicType musicType = new MusicType();
+    /**
+     * method return music type by id
+     * @param id - music type id
+     * @return - music type.
+     */
+    public Music getMusicTypeById(long id) {
+        Music musicType = new Music();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection();
              PreparedStatement ps = conn.prepareStatement("SELECT * FROM music_types WHERE id = ?")) {
             ps.setLong(1, id);

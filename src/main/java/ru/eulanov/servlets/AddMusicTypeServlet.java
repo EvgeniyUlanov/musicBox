@@ -1,7 +1,7 @@
 package ru.eulanov.servlets;
 
-import ru.eulanov.entities.MusicType;
-import ru.eulanov.stores.MusicTypeStore;
+import ru.eulanov.entities.Music;
+import ru.eulanov.stores.MusicStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,11 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * servlet for add music type to database.
+ */
 public class AddMusicTypeServlet extends HttpServlet {
+
+    /**
+     * method doPost.
+     * @param req - http request
+     * @param resp - http response
+     * @throws ServletException - servlet exception
+     * @throws IOException - io exception
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        MusicType musicType = new MusicType();
+        Music musicType = new Music();
         musicType.setMusicType(req.getParameter("newMusicType"));
-        MusicTypeStore.getInstance().addMusicType(musicType);
+        MusicStore.getInstance().addMusicType(musicType);
     }
 }
