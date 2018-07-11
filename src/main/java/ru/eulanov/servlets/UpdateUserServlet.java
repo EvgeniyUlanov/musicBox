@@ -15,11 +15,27 @@ import java.io.IOException;
  * servlet for update user
  */
 public class UpdateUserServlet extends HttpServlet{
+
+    private UserStore userStore;
+
+    @Override
+    public void init() throws ServletException {
+        userStore = UserStore.getInstance();
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String incomingString = MyUtil.getIncomingStringFromReqest(req);
+        String incomingString = MyUtil.getIncomingStringFromRequest(req);
         Gson gson = new Gson();
         User user = gson.fromJson(incomingString, User.class);
-        UserStore.getInstance().updateUser(user);
+        userStore.updateUser(user);
+    }
+
+    public UserStore getUserStore() {
+        return userStore;
+    }
+
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
     }
 }

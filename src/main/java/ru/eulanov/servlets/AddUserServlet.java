@@ -17,6 +17,17 @@ import java.io.IOException;
  * servlet to save user to database
  */
 public class AddUserServlet extends HttpServlet {
+    /** user store*/
+    private UserStore userStore;
+    /** address store*/
+    private AddressStore addressStore;
+
+    @Override
+    public void init() throws ServletException {
+        userStore = UserStore.getInstance();
+        addressStore = AddressStore.getInstance();
+    }
+
     /**
      * method doPost
      * @param req - http request
@@ -26,12 +37,28 @@ public class AddUserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String incomingString = MyUtil.getIncomingStringFromReqest(req);
+        String incomingString = MyUtil.getIncomingStringFromRequest(req);
         Gson gson = new Gson();
         User user = gson.fromJson(incomingString, User.class);
         Address address = new Address();
         address.setAddress(user.getAddress());
-        AddressStore.getInstance().addAddress(address);
-        UserStore.getInstance().addUser(user);
+        addressStore.addAddress(address);
+        userStore.addUser(user);
+    }
+
+    public UserStore getUserStore() {
+        return userStore;
+    }
+
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
+    }
+
+    public AddressStore getAddressStore() {
+        return addressStore;
+    }
+
+    public void setAddressStore(AddressStore addressStore) {
+        this.addressStore = addressStore;
     }
 }

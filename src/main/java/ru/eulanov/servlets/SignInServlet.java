@@ -14,6 +14,14 @@ import java.io.IOException;
  * servlet for login user
  */
 public class SignInServlet extends HttpServlet {
+
+    private UserStore userStore;
+
+    @Override
+    public void init() throws ServletException {
+        userStore = UserStore.getInstance();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/views/signin.jsp").forward(req, resp);
@@ -22,7 +30,7 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
-        User user = UserStore.getInstance().getUserForLogin(login);
+        User user = userStore.getUserForLogin(login);
         String password = req.getParameter("password");
         if (user.getLogin() != null && user.getPassword().equals(password)) {
             HttpSession session = req.getSession();
@@ -32,5 +40,13 @@ public class SignInServlet extends HttpServlet {
         } else {
             doGet(req, resp);
         }
+    }
+
+    public UserStore getUserStore() {
+        return userStore;
+    }
+
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
     }
 }

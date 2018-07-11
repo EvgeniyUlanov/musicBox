@@ -13,7 +13,7 @@ public class MyUtil {
      * @param req - request
      * @return string
      */
-    public static String getIncomingStringFromReqest(HttpServletRequest req) {
+    public static String getIncomingStringFromRequest(HttpServletRequest req) {
         StringBuilder incomingString = new StringBuilder();
         String line;
         try {

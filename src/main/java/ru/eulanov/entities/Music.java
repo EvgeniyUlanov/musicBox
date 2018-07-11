@@ -40,4 +40,19 @@ public class Music {
     public void setMusicType(String musicType) {
         this.musicType = musicType;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Music)) return false;
+
+        Music music = (Music) o;
+
+        return musicType != null ? musicType.equals(music.musicType) : music.musicType == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return musicType != null ? musicType.hashCode() : 0;
+    }
 }

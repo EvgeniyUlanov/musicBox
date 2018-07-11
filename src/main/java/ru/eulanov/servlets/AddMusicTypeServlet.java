@@ -14,6 +14,13 @@ import java.io.IOException;
  */
 public class AddMusicTypeServlet extends HttpServlet {
 
+    private MusicStore musicStore;
+
+    @Override
+    public void init() throws ServletException {
+        musicStore = MusicStore.getInstance();
+    }
+
     /**
      * method doPost.
      * @param req - http request
@@ -25,6 +32,14 @@ public class AddMusicTypeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Music musicType = new Music();
         musicType.setMusicType(req.getParameter("newMusicType"));
-        MusicStore.getInstance().addMusicType(musicType);
+        musicStore.addMusicType(musicType);
+    }
+
+    public MusicStore getMusicStore() {
+        return musicStore;
+    }
+
+    public void setMusicStore(MusicStore musicStore) {
+        this.musicStore = musicStore;
     }
 }

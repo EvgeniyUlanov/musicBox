@@ -12,6 +12,14 @@ import java.io.IOException;
  * servlet to set music type to user as favorite.
  */
 public class AddMusicToUserServlet extends HttpServlet {
+    /** user store*/
+    private UserStore userStore;
+
+    @Override
+    public void init() throws ServletException {
+        userStore = UserStore.getInstance();
+    }
+
     /**
      * method doPost.
      * @param req - http request
@@ -23,6 +31,14 @@ public class AddMusicToUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long userId = Long.parseLong(req.getParameter("userId"));
         String musicType = req.getParameter("musicType");
-        UserStore.getInstance().setMusicPrefToUser(userId, musicType);
+        userStore.setMusicPrefToUser(userId, musicType);
+    }
+
+    public UserStore getUserStore() {
+        return userStore;
+    }
+
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
     }
 }

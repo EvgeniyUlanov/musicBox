@@ -16,13 +16,28 @@ import java.util.List;
  */
 public class GetAllMusicTypesServlet extends HttpServlet {
 
+    private MusicStore musicStore;
+
+    @Override
+    public void init() throws ServletException {
+        musicStore = MusicStore.getInstance();
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Music> musicTypes = MusicStore.getInstance().getAll();
+        List<Music> musicTypes = musicStore.getAll();
         Gson gson = new Gson();
         String musicTypesJson = gson.toJson(musicTypes);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("utf-8");
         resp.getWriter().write(musicTypesJson);
+    }
+
+    public MusicStore getMusicStore() {
+        return musicStore;
+    }
+
+    public void setMusicStore(MusicStore musicStore) {
+        this.musicStore = musicStore;
     }
 }

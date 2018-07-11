@@ -44,4 +44,19 @@ public class Address {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address)) return false;
+
+        Address address1 = (Address) o;
+
+        return address != null ? address.equals(address1.address) : address1.address == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return address != null ? address.hashCode() : 0;
+    }
 }

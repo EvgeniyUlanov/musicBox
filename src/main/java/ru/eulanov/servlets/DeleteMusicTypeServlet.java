@@ -11,22 +11,34 @@ import java.io.IOException;
 /**
  * servlet delete music type from database
  */
-public class DeleteMusicTypeServlet extends HttpServlet{
+public class DeleteMusicTypeServlet extends HttpServlet {
+
+    private MusicStore musicStore;
+
+    @Override
+    public void init() throws ServletException {
+        musicStore = MusicStore.getInstance();
+    }
 
     /**
      * method doGet deletes music by music id
-     * @param req - request
+     *
+     * @param req  - request
      * @param resp - response
      * @throws ServletException - servlet exception
-     * @throws IOException - io exception
+     * @throws IOException      - io exception
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            Long id = Long.parseLong(req.getParameter("musicId"));
-            MusicStore.getInstance().deleteMusicType(id);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        Long id = Long.parseLong(req.getParameter("musicId"));
+        musicStore.deleteMusicType(id);
+    }
+
+    public MusicStore getMusicStore() {
+        return musicStore;
+    }
+
+    public void setMusicStore(MusicStore musicStore) {
+        this.musicStore = musicStore;
     }
 }

@@ -38,17 +38,20 @@ public class AddressStore {
      * method return all addresses.
      * @return addresses
      */
-    public List<String> getAllAddress() {
-        List<String> address = new ArrayList<>();
+    public List<Address> getAllAddress() {
+        List<Address> addresses = new ArrayList<>();
         try (Connection conn = DBConnectionPool.getDbSource().getConnection(); Statement st = conn.createStatement()) {
-            ResultSet rs = st.executeQuery("SELECT addres FROM address");
+            ResultSet rs = st.executeQuery("SELECT * FROM address");
             while (rs.next()) {
-                address.add(rs.getString("addres"));
+                Address address = new Address();
+                address.setId(rs.getLong("id"));
+                address.setAddress(rs.getString("addres"));
+                addresses.add(address);
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-        return address;
+        return addresses;
     }
 
     /**

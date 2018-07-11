@@ -11,6 +11,14 @@ import java.sql.Statement;
  */
 public class InitDataBase {
 
+    public static void initDB() {
+        InitDataBase.createTableUsers();
+        InitDataBase.createTableRoles();
+        InitDataBase.createTableAddress();
+        InitDataBase.createTableMusicTypes();
+        InitDataBase.createTableMusicPreferes();
+    }
+
     /**
      * method creates user table
      */

@@ -11,7 +11,14 @@ import java.io.IOException;
 /**
  * servlet remove music type from users favorite music list.
  */
-public class DeleteMusicFromUser extends HttpServlet {
+public class DeleteMusicFromUserServlet extends HttpServlet {
+    /** user store*/
+    private UserStore userStore;
+
+    @Override
+    public void init() throws ServletException {
+        userStore = UserStore.getInstance();
+    }
 
     /**
      * method doGet
@@ -24,6 +31,14 @@ public class DeleteMusicFromUser extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long userId = Long.parseLong(req.getParameter("userId"));
         String musicType = req.getParameter("musicType");
-        UserStore.getInstance().deleteMusicFromUser(userId, musicType);
+        userStore.deleteMusicFromUser(userId, musicType);
+    }
+
+    public UserStore getUserStore() {
+        return userStore;
+    }
+
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
     }
 }

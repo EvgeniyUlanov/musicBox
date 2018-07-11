@@ -35,11 +35,7 @@ public class UserController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        InitDataBase.createTableUsers();
-        InitDataBase.createTableRoles();
-        InitDataBase.createTableAddress();
-        InitDataBase.createTableMusicTypes();
-        InitDataBase.createTableMusicPreferes();
+        InitDataBase.initDB();
     }
 
     @Override

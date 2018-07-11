@@ -139,7 +139,7 @@
 
     <servlet>
         <servlet-name>Delete music from user</servlet-name>
-        <servlet-class>ru.eulanov.servlets.DeleteMusicFromUser</servlet-class>
+        <servlet-class>ru.eulanov.servlets.DeleteMusicFromUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

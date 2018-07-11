@@ -15,6 +15,14 @@ import java.util.List;
  * servlet for getting users by query
  */
 public class GetAllUserServlet extends HttpServlet {
+
+    private UserStore userStore;
+
+    @Override
+    public void init() throws ServletException {
+        userStore = UserStore.getInstance();
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String selectedCategory = req.getParameter("selectedCategory");
@@ -23,22 +31,22 @@ public class GetAllUserServlet extends HttpServlet {
         if (selectedCategory != null) {
             switch (selectedCategory) {
                 case "name":
-                    users = UserStore.getInstance().findUserByName(whatNeedToFind);
+                    users = userStore.findUserByName(whatNeedToFind);
                     break;
                 case "login":
-                    users = UserStore.getInstance().findUserByLogin(whatNeedToFind);
+                    users = userStore.findUserByLogin(whatNeedToFind);
                     break;
                 case "role":
-                    users = UserStore.getInstance().findUserByRole(whatNeedToFind);
+                    users = userStore.findUserByRole(whatNeedToFind);
                     break;
                 case "address":
-                    users = UserStore.getInstance().findUserByAddress(whatNeedToFind);
+                    users = userStore.findUserByAddress(whatNeedToFind);
                     break;
                 case "music":
-                    users = UserStore.getInstance().findUserByMusic(whatNeedToFind);
+                    users = userStore.findUserByMusic(whatNeedToFind);
                     break;
                 default:
-                    users = UserStore.getInstance().getAllUsers();
+                    users = userStore.getAllUsers();
             }
         }
         Gson gson = new Gson();
@@ -46,5 +54,13 @@ public class GetAllUserServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         resp.getWriter().write(usersGson);
+    }
+
+    public UserStore getUserStore() {
+        return userStore;
+    }
+
+    public void setUserStore(UserStore userStore) {
+        this.userStore = userStore;
     }
 }
