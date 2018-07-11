@@ -1,13 +1,25 @@
 package ru.eulanov.entities;
 
-public class User {
+import java.util.List;
 
+/**
+ * class for entity user.
+ */
+public class User {
+    /** user id*/
     private long id;
+    /** user name*/
     private String name;
+    /** user login*/
     private String login;
+    /** user address*/
     private String address;
+    /** user role*/
     private String role;
-    private String[] favoriteMusic;
+    /** user password*/
+    private String password;
+    /** user's favorite music*/
+    private List<String> favoriteMusic;
 
     public long getId() {
         return id;
@@ -41,11 +53,11 @@ public class User {
         this.role = role;
     }
 
-    public String[] getFavoriteMusic() {
+    public List<String> getFavoriteMusic() {
         return favoriteMusic;
     }
 
-    public void setFavoriteMusic(String[] favoriteMusic) {
+    public void setFavoriteMusic(List<String> favoriteMusic) {
         this.favoriteMusic = favoriteMusic;
     }
 
@@ -57,8 +69,29 @@ public class User {
         this.login = login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
-    public String toString() {
-        return id + " - " + name + ", role - " + role + ", login - " + login;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        return login != null ? login.equals(user.login) : user.login == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        return result;
     }
 }

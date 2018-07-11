@@ -27,6 +27,125 @@
         <url-pattern>/sign</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Sign out servlet</servlet-name>
+        <servlet-class>ru.eulanov.servlets.SignOutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Sign out servlet</servlet-name>
+        <url-pattern>/signout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Get all users servlet</servlet-name>
+        <servlet-class>ru.eulanov.servlets.GetAllUserServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Get all users servlet</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Add user servlet</servlet-name>
+        <servlet-class>ru.eulanov.servlets.AddUserServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Add user servlet</servlet-name>
+        <url-pattern>/user/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Delete user servlet</servlet-name>
+        <servlet-class>ru.eulanov.servlets.DeleteUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Delete user servlet</servlet-name>
+        <url-pattern>/user/delete</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Get All roles servlet</servlet-name>
+        <servlet-class>ru.eulanov.servlets.GetRolesServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Get All roles servlet</servlet-name>
+        <url-pattern>/roles</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Get user by id</servlet-name>
+        <servlet-class>ru.eulanov.servlets.GetUserServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Get user by id</servlet-name>
+        <url-pattern>/user/get</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Update user</servlet-name>
+        <servlet-class>ru.eulanov.servlets.UpdateUserServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Update user</servlet-name>
+        <url-pattern>/user/update</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Get all music types</servlet-name>
+        <servlet-class>ru.eulanov.servlets.GetAllMusicTypesServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Get all music types</servlet-name>
+        <url-pattern>/musicTypes</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Delete music type</servlet-name>
+        <servlet-class>ru.eulanov.servlets.DeleteMusicTypeServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Delete music type</servlet-name>
+        <url-pattern>/musicType/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Add Music type</servlet-name>
+        <servlet-class>ru.eulanov.servlets.AddMusicTypeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Add Music type</servlet-name>
+        <url-pattern>/musicType/add</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Add music to user</servlet-name>
+        <servlet-class>ru.eulanov.servlets.AddMusicToUserServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Add music to user</servlet-name>
+        <url-pattern>/user/addMusic</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Delete music from user</servlet-name>
+        <servlet-class>ru.eulanov.servlets.DeleteMusicFromUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Delete music from user</servlet-name>
+        <url-pattern>/user/deleteMusic</url-pattern>
+    </servlet-mapping>
     <filter>
         <filter-name>Filter</filter-name>
         <filter-class>ru.eulanov.servlets.AutorizationFilter</filter-class>
@@ -36,5 +155,10 @@
         <filter-name>Filter</filter-name>
         <url-pattern>*</url-pattern>
     </filter-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
 
 </web-app>
