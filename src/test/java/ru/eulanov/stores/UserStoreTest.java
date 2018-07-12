@@ -42,6 +42,7 @@ public class UserStoreTest {
     @After
     public void cleanTableUsers() {
         InitDataBase.createTableUsers();
+        InitDataBase.createTableMusicPreferes();
     }
 
     @Test

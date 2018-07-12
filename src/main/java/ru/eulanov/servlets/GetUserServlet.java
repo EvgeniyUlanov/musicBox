@@ -30,7 +30,6 @@ public class GetUserServlet extends HttpServlet{
         String userJson = gson.toJson(user);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("utf-8");
-        System.out.println(userJson);
         resp.getWriter().write(userJson);
     }
 

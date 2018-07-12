@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/EvgeniyUlanov/musicBox.svg?branch=master)](https://travis-ci.org/EvgeniyUlanov/musicBox)
+[![codecov](https://codecov.io/gh/EvgeniyUlanov/musicBox/branch/master/graph/badge.svg)](https://codecov.io/gh/EvgeniyUlanov/musicBox)
 # Music Box
 This is a my learning project
 Here I used jdbc, servlet, jsp. Without spring and hibernate.

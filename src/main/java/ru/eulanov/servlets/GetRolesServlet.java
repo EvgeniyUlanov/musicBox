@@ -29,7 +29,6 @@ public class GetRolesServlet extends HttpServlet{
         String rolesJson = gson.toJson(roles);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("utf-8");
-        System.out.println(rolesJson);
         resp.getWriter().write(rolesJson);
     }
 
